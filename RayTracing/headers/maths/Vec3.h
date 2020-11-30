@@ -62,6 +62,15 @@ namespace maths
 
 			return *this;
 		}
+
+		inline float magnitude_squared() const
+		{
+			return x * x + y * y + z * z;
+		}
+		inline float magnitude() const
+		{
+			return std::sqrtf(magnitude_squared());
+		}
 	};
 
 	inline Vec3 operator *(const Vec3& v, const float f)
@@ -94,18 +103,9 @@ namespace maths
 		return Vec3(l.x / r.x, l.y / r.y, l.z / r.z);
 	}
 
-	inline float magnitude_squared(const Vec3& v)
-	{
-		return v.x * v.x + v.y * v.y + v.z * v.z;
-	}
-	inline float magnitude(const Vec3& v)
-	{
-		return std::sqrtf(magnitude_squared(v));
-	}
-
 	inline Vec3 normalized(const Vec3& v)
 	{
-		return v * (1.f / magnitude(v));
+		return v * (1.f / v.magnitude());
 	}
 	inline float dot(const Vec3& l, const Vec3& r)
 	{

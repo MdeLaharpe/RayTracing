@@ -1,11 +1,28 @@
 #include <iostream>
 #include <fstream>
+#include <cmath>
 
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
 
+bool hit_sphere(const maths::Vec3& center, float radius, const maths::Ray& r)
+{
+	maths::Vec3 oc = r.origin - center;
+	float a = r.direction.magnitude_squared();
+	float halfB = maths::dot(oc, r.direction);
+	float c = oc.magnitude_squared() - radius * radius;
+	float discriminant = halfB * halfB - a * c;
+
+	return discriminant >= 0.f;
+}
+
 maths::Vec3 ray_color(const maths::Ray& r)
 {
+	if (hit_sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f, r))
+	{
+		return maths::Vec3(1.f, 0.f, 0.f);
+	}
+
 	maths::Vec3 unitDirection = normalized(r.direction);
 	float t = 0.5f * (unitDirection.y + 1.f);
 	return (1.f - t) * maths::Vec3(1.f, 1.f, 1.f) + t * maths::Vec3(0.5f, 0.7f, 1.f);
