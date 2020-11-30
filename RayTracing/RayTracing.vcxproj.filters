@@ -26,5 +26,8 @@
     <ClInclude Include="headers\maths\Vec3.h">
       <Filter>Header Files\Maths</Filter>
     </ClInclude>
+    <ClInclude Include="headers\maths\Ray.h">
+      <Filter>Header Files\Maths</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -68,6 +68,10 @@ namespace maths
 	{
 		return Vec3(v.x * f, v.y * f, v.z * f);
 	}
+	inline Vec3 operator *(const float f, const Vec3& v)
+	{
+		return v * f;
+	}
 	inline Vec3 operator /(const Vec3& v, const float f)
 	{
 		return v * (1.f / f);
