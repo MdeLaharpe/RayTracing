@@ -5,7 +5,7 @@
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
 
-bool hit_sphere(const maths::Vec3& center, float radius, const maths::Ray& r)
+bool hit_sphere(const maths::Vec3& center, float radius, const maths::Ray& r, float& hitTime)
 {
 	maths::Vec3 oc = r.origin - center;
 	float a = r.direction.magnitude_squared();
@@ -13,14 +13,23 @@ bool hit_sphere(const maths::Vec3& center, float radius, const maths::Ray& r)
 	float c = oc.magnitude_squared() - radius * radius;
 	float discriminant = halfB * halfB - a * c;
 
-	return discriminant >= 0.f;
+	if (discriminant < 0.f)
+		return false;
+	else
+	{
+		hitTime = (-halfB - sqrtf(discriminant)) / a;
+		return true;
+	}
 }
 
 maths::Vec3 ray_color(const maths::Ray& r)
 {
-	if (hit_sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f, r))
+	const maths::Vec3 sphereCenter(0.f, 0.f, -1.f);
+	float hitTime;
+	if (hit_sphere(sphereCenter, 0.5f, r, hitTime))
 	{
-		return maths::Vec3(1.f, 0.f, 0.f);
+		maths::Vec3 normal = maths::normalized(r.at(hitTime) - sphereCenter);
+		return 0.5f * maths::Vec3(normal.x + 1.f, normal.y + 1.f, normal.z + 1.f);
 	}
 
 	maths::Vec3 unitDirection = normalized(r.direction);
