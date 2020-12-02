@@ -27,7 +27,8 @@ namespace rt
 
 		rec.t = root;
 		rec.point = r.at(root);
-		rec.normal = (rec.point - center) / radius;
+		maths::Vec3 outwardNormal = (rec.point - center) / radius;
+		rec.setFaceNormal(r, outwardNormal);
 		return true;
 	}
 }
