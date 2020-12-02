@@ -151,9 +151,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\hittables\Sphere.cpp" />
     <ClCompile Include="sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\hittables\Hittable.h" />
+    <ClInclude Include="headers\hittables\Sphere.h" />
     <ClInclude Include="headers\maths\Ray.h" />
     <ClInclude Include="headers\maths\Vec3.h" />
   </ItemGroup>

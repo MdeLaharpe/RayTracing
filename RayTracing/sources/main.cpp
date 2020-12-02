@@ -4,6 +4,7 @@
 
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
+#include "hittables/Sphere.h"
 
 bool hit_sphere(const maths::Vec3& center, float radius, const maths::Ray& r, float& hitTime)
 {
@@ -24,13 +25,10 @@ bool hit_sphere(const maths::Vec3& center, float radius, const maths::Ray& r, fl
 
 maths::Vec3 ray_color(const maths::Ray& r)
 {
-	const maths::Vec3 sphereCenter(0.f, 0.f, -1.f);
-	float hitTime;
-	if (hit_sphere(sphereCenter, 0.5f, r, hitTime))
-	{
-		maths::Vec3 normal = maths::normalized(r.at(hitTime) - sphereCenter);
-		return 0.5f * maths::Vec3(normal.x + 1.f, normal.y + 1.f, normal.z + 1.f);
-	}
+	const rt::Sphere sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f);
+	rt::HitRecord rec;
+	if (sphere.hit(r, 0.f, 1000.f, rec))
+		return 0.5f * maths::Vec3(rec.normal.x + 1.f, rec.normal.y + 1.f, rec.normal.z + 1.f);
 
 	maths::Vec3 unitDirection = normalized(r.direction);
 	float t = 0.5f * (unitDirection.y + 1.f);

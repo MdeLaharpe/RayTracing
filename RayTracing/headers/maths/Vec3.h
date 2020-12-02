@@ -23,8 +23,11 @@ namespace maths
 			float val[3];
 		};
 
-		inline float operator[](size_t i) const { return val[i]; }
-		inline float& operator[](size_t i) { return val[i]; }
+		Vec3& operator =(const Vec3& v) = default;
+		Vec3& operator =(Vec3&& v) = default;
+
+		inline float operator [](size_t i) const { return val[i]; }
+		inline float& operator [](size_t i) { return val[i]; }
 
 		inline Vec3 operator -() const
 		{
@@ -120,10 +123,10 @@ namespace maths
 		);
 	}
 
-	std::ostream& operator<<(std::ostream& out, const Vec3& v)
+	inline std::ostream& operator <<(std::ostream& out, const Vec3& v)
 	{
 		return out << v.x << ' ' << v.y << ' ' << v.z;
 	}
 }
 
-#endif
+#endif MATHS_VEC3_H

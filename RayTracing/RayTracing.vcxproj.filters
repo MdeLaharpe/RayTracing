@@ -16,10 +16,19 @@
     <Filter Include="Header Files\Maths">
       <UniqueIdentifier>{8cc7ee41-252e-4938-97f0-956d305621af}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Hittables">
+      <UniqueIdentifier>{cc4ef33f-ff0b-48b9-92a7-f01b0520c371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Hittables">
+      <UniqueIdentifier>{2be0852c-556c-4de4-9556-59ddc27732c3}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\hittables\Sphere.cpp">
+      <Filter>Source Files\Hittables</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -28,6 +37,12 @@
     </ClInclude>
     <ClInclude Include="headers\maths\Ray.h">
       <Filter>Header Files\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\hittables\Hittable.h">
+      <Filter>Header Files\Hittables</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\hittables\Sphere.h">
+      <Filter>Header Files\Hittables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
