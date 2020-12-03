@@ -42,9 +42,6 @@ int main(int argc, char* argv[])
 	// PPM image format header
 	out << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
-	// RNG initialization
-	rt::Random random;
-
 	// Camera
 	const maths::Vec3 cameraPos;
 	const float viewportHeight = 2.f;
@@ -69,8 +66,8 @@ int main(int argc, char* argv[])
 
 			for (size_t s = 0; s < samplesPerPixel; s++)
 			{
-				float u = (i + random.Rand01()) / (imageWidth + 1);
-				float v = (j + random.Rand01()) / (imageHeight + 1);
+				float u = (i + rt::Rand01()) / (imageWidth + 1);
+				float v = (j + rt::Rand01()) / (imageHeight + 1);
 				maths::Ray r = camera.GetRay(u, v);
 
 				color += Color(r, world);

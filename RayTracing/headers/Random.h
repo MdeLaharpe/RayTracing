@@ -7,19 +7,8 @@
 
 namespace rt
 {
-	class Random
-	{
-	public:
-		Random();
-
-		float Rand01();
-		maths::Vec3 RandInUnitSphere();
-
-	private:
-		std::random_device randDevice;
-		std::default_random_engine randEngine;// (randDevice());
-		std::uniform_real_distribution<float> randDistribution; // (0.f, 1.f);
-	};
+	float Rand01();
+	maths::Vec3 RandInUnitSphere();
 }
 
 #endif RT_RANDOM_H
