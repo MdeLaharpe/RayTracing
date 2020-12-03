@@ -11,7 +11,7 @@ namespace rt
 	{
 	public:
 		constexpr Sphere() : center(), radius(1.f) { }
-		Sphere(const maths::Vec3& center, float radius)
+		constexpr Sphere(const maths::Vec3& center, float radius)
 			: center(center), radius(radius)
 		{ }
 
