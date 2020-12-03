@@ -14,7 +14,7 @@ namespace rt
 	maths::Vec3 RandInUnitSphere()
 	{
 		maths::Vec3 point;
-		do { point = 2.f * maths::Vec3(Rand01(), Rand01(), Rand01()) - maths::Vec3(-1.f); }
+		do { point = 2.f * maths::Vec3(Rand01(), Rand01(), Rand01()) - maths::Vec3(1.f); }
 		while( point.MagnitudeSquared() > 1.f);
 		return point;
 	}
