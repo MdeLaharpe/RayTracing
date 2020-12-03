@@ -75,6 +75,13 @@ namespace maths
 		{
 			return std::sqrtf(MagnitudeSquared());
 		}
+
+		inline void Apply(float (*func)(float))
+		{
+			x = func(x);
+			y = func(y);
+			z = func(z);
+		}
 	};
 
 	inline Vec3 operator *(const Vec3& v, const float f)

@@ -77,6 +77,7 @@ int main(int argc, char* argv[])
 			}
 
 			color /= float(samplesPerPixel);
+			color.Apply(std::sqrtf);
 
 			out << static_cast<int>(255.999f * color.x) << ' '
 				<< static_cast<int>(255.999f * color.y) << ' '
