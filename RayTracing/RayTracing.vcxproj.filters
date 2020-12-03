@@ -36,6 +36,9 @@
     <ClCompile Include="sources\Camera.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sources\Random.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\maths\Vec3.h">
@@ -54,6 +57,9 @@
       <Filter>Header Files\Hittables</Filter>
     </ClInclude>
     <ClInclude Include="headers\Camera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Random.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

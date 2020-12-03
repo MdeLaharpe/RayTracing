@@ -8,8 +8,9 @@ namespace maths
 {
 	struct Vec3
 	{
-		constexpr Vec3() : val{ 0.f, 0.f, 0.f } {};
-		constexpr Vec3(float x, float y, float z) : val{ x, y, z } {};
+		constexpr Vec3() : val{ 0.f, 0.f, 0.f } { };
+		constexpr Vec3(float f) : val{ f, f, f } { };
+		constexpr Vec3(float x, float y, float z) : val{ x, y, z } { };
 
 		Vec3(const Vec3& v) = default;
 		Vec3(Vec3&& v) = default;

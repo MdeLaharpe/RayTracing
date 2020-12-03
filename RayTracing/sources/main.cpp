@@ -1,10 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
-#include <random>
 
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
+#include "Random.h"
 #include "Camera.h"
 #include "hittables/HittableList.h"
 #include "hittables/Sphere.h"
@@ -43,9 +43,7 @@ int main(int argc, char* argv[])
 	out << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
 	// RNG initialization
-	std::random_device randDevice;
-	std::default_random_engine randEngine(randDevice());
-	std::uniform_real_distribution<float> randDistribution(0.f, 1.f);
+	rt::Random random;
 
 	// Camera
 	const maths::Vec3 cameraPos;
@@ -56,11 +54,11 @@ int main(int argc, char* argv[])
 
 	// World initialization
 	rt::Hittable* spheres[4];
-	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -1000.f, -1.f), 500.f);
+	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f);
 	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f);
 	spheres[2] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f);
 	spheres[3] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f);
-	rt::HittableList world(spheres, 3);
+	rt::HittableList world(spheres, 4);
 
 	// Render
 	for (int j = imageHeight - 1; j >= 0; j--)
@@ -71,8 +69,8 @@ int main(int argc, char* argv[])
 
 			for (size_t s = 0; s < samplesPerPixel; s++)
 			{
-				float u = (i + randDistribution(randEngine)) / (imageWidth + 1);
-				float v = (j + randDistribution(randEngine)) / (imageHeight + 1);
+				float u = (i + random.Rand01()) / (imageWidth + 1);
+				float v = (j + random.Rand01()) / (imageHeight + 1);
 				maths::Ray r = camera.GetRay(u, v);
 
 				color += Color(r, world);
