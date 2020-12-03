@@ -9,11 +9,19 @@
 #include "hittables/HittableList.h"
 #include "hittables/Sphere.h"
 
-maths::Vec3 Color(const maths::Ray& r, const rt::HittableList& world)
+maths::Vec3 Color(const maths::Ray& r, const rt::HittableList& world, size_t depth, size_t depthMax)
 {
 	rt::HitRecord rec;
-	if (world.Hit(r, 0.f, 1000.f, rec))
-		return 0.5f * maths::Vec3(rec.normal.x + 1.f, rec.normal.y + 1.f, rec.normal.z + 1.f);
+	if (world.Hit(r, 0.001f, 1000.f, rec))
+	{
+		if (depth < depthMax)
+		{
+			maths::Vec3 target = rec.point + rec.normal + rt::RandInUnitSphere();
+			return 0.5f * Color(maths::Ray(rec.point, target - rec.point), world, depth + 1, depthMax);
+		}
+		else
+			return maths::Vec3();
+	}
 
 	maths::Vec3 unitDirection = Normalized(r.direction);
 	float t = 0.5f * (unitDirection.y + 1.f);
@@ -29,6 +37,7 @@ int main(int argc, char* argv[])
 	const size_t imageWidth = 400;
 	const size_t imageHeight = static_cast<int>(imageWidth / aspectRatio);
 	const size_t samplesPerPixel = 16;
+	const size_t depthMax = 10;
 
 	// Opening the output file
 	std::ofstream out;
@@ -70,7 +79,7 @@ int main(int argc, char* argv[])
 				float v = (j + rt::Rand01()) / (imageHeight + 1);
 				maths::Ray r = camera.GetRay(u, v);
 
-				color += Color(r, world);
+				color += Color(r, world, 0, depthMax);
 			}
 
 			color /= float(samplesPerPixel);

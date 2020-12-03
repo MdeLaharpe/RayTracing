@@ -15,10 +15,11 @@ namespace rt
 			: center(center), radius(radius)
 		{ }
 
+		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
+
+	private:
 		maths::Vec3 center;
 		float radius;
-
-		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
 	};
 }
 
