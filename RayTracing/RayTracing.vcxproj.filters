@@ -22,6 +22,12 @@
     <Filter Include="Source Files\Hittables">
       <UniqueIdentifier>{2be0852c-556c-4de4-9556-59ddc27732c3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Materials">
+      <UniqueIdentifier>{f8621deb-c180-4e6e-9a15-b8a2e43da9ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Materials">
+      <UniqueIdentifier>{f45433e8-59a7-47f7-b6a2-9c3270d2725e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -38,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="sources\Random.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\materials\Lambertian.cpp">
+      <Filter>Source Files\Materials</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\materials\Metal.cpp">
+      <Filter>Source Files\Materials</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -61,6 +73,15 @@
     </ClInclude>
     <ClInclude Include="headers\Random.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Material.h">
+      <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Lambertian.h">
+      <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\materials\Metal.h">
+      <Filter>Header Files\Materials</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

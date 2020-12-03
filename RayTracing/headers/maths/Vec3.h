@@ -130,6 +130,10 @@ namespace maths
 			l.x * r.y - l.y * r.x
 		);
 	}
+	inline Vec3 Reflected(const Vec3& v, const Vec3& normal)
+	{
+		return v - 2.f * Dot(v, normal) * normal;
+	}
 
 	inline std::ostream& operator <<(std::ostream& out, const Vec3& v)
 	{

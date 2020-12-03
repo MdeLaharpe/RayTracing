@@ -8,17 +8,18 @@
 #include "Camera.h"
 #include "hittables/HittableList.h"
 #include "hittables/Sphere.h"
+#include "materials/Lambertian.h"
+#include "materials/Metal.h"
 
 maths::Vec3 Color(const maths::Ray& r, const rt::HittableList& world, size_t depth, size_t depthMax)
 {
 	rt::HitRecord rec;
 	if (world.Hit(r, 0.001f, 1000.f, rec))
 	{
-		if (depth < depthMax)
-		{
-			maths::Vec3 target = rec.point + rec.normal + rt::RandInUnitSphere();
-			return 0.5f * Color(maths::Ray(rec.point, target - rec.point), world, depth + 1, depthMax);
-		}
+		maths::Ray scattered;
+		maths::Vec3 attenuation;
+		if (depth < depthMax && rec.material->Scatter(r, rec, attenuation, scattered))
+			return attenuation * Color(scattered, world, depth + 1, depthMax);
 		else
 			return maths::Vec3();
 	}
@@ -59,11 +60,11 @@ int main(int argc, char* argv[])
 	const rt::Camera camera(cameraPos, viewportHeight, aspectRatio, focalLength);
 
 	// World initialization
-	rt::Hittable* spheres[4];
-	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f);
-	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f);
-	spheres[2] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f);
-	spheres[3] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f);
+	rt::Hittable** spheres = new rt::Hittable*[4];
+	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, new rt::Lambertian(maths::Vec3(0.8f, 0.8f, 0.f)));
+	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.8f, 0.8f)));
+	spheres[2] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f, new rt::Lambertian(maths::Vec3(0.8f, 0.3f, 0.3f)));
+	spheres[3] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.6f, 0.2f)));
 	rt::HittableList world(spheres, 4);
 
 	// Render
@@ -90,11 +91,6 @@ int main(int argc, char* argv[])
 				<< static_cast<int>(255.999f * color.z) << '\n';
 		}
 	}
-
-	// World de-initialization
-	delete spheres[0];
-	delete spheres[1];
-	delete spheres[2];
 
 	// Closing the output file
 	out.close();

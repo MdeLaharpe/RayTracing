@@ -4,6 +4,11 @@
 
 namespace rt
 {
+	Sphere::~Sphere()
+	{
+		delete material;
+	}
+
 	bool Sphere::Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const
 	{
 		maths::Vec3 oc = r.origin - center;
@@ -29,6 +34,7 @@ namespace rt
 		rec.point = r.At(root);
 		maths::Vec3 outwardNormal = (rec.point - center) / radius;
 		rec.SetFaceNormal(r, outwardNormal);
+		rec.material = material;
 		return true;
 	}
 }

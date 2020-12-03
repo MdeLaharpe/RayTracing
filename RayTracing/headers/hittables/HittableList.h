@@ -11,6 +11,8 @@ namespace rt
 		constexpr HittableList() : list(nullptr), size(0) { }
 		constexpr HittableList(Hittable** list, size_t size) : list(list), size(size) { }
 
+		virtual ~HittableList();
+
 		Hittable** list;
 		size_t size;
 

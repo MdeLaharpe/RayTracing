@@ -155,6 +155,8 @@
     <ClCompile Include="sources\hittables\HittableList.cpp" />
     <ClCompile Include="sources\hittables\Sphere.cpp" />
     <ClCompile Include="sources\main.cpp" />
+    <ClCompile Include="sources\materials\Lambertian.cpp" />
+    <ClCompile Include="sources\materials\Metal.cpp" />
     <ClCompile Include="sources\Random.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -162,6 +164,9 @@
     <ClInclude Include="headers\hittables\Hittable.h" />
     <ClInclude Include="headers\hittables\HittableList.h" />
     <ClInclude Include="headers\hittables\Sphere.h" />
+    <ClInclude Include="headers\materials\Lambertian.h" />
+    <ClInclude Include="headers\materials\Material.h" />
+    <ClInclude Include="headers\materials\Metal.h" />
     <ClInclude Include="headers\maths\Ray.h" />
     <ClInclude Include="headers\maths\Vec3.h" />
     <ClInclude Include="headers\Random.h" />

@@ -6,14 +6,17 @@
 
 namespace rt
 {
+	class Material;
+
 	struct HitRecord
 	{
-		HitRecord() : point(), normal(), t(0.f), frontFace(true) { }
+		constexpr HitRecord() : point(), normal(), t(0.f), frontFace(true), material(nullptr) { }
 
 		maths::Vec3 point;
 		maths::Vec3 normal;
 		float t;
 		bool frontFace;
+		Material* material;
 
 		inline void SetFaceNormal(const maths::Ray& r, const maths::Vec3& outwardNormal)
 		{
@@ -25,6 +28,8 @@ namespace rt
 	class Hittable
 	{
 	public:
+		virtual ~Hittable() = default;
+
 		virtual bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const = 0;
 	};
 }
