@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <random>
 
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
@@ -42,15 +43,9 @@ int main(int argc, char* argv[])
 
 	// Image
 	const float aspectRatio = 16.f / 9.f;
-	const int imageWidth = 400;
-	const int imageHeight = static_cast<int>(imageWidth / aspectRatio);
-
-	// Camera
-	const maths::Vec3 cameraPos;
-	const float viewportHeight = 2.f;
-	const float focalLength = 1.f;
-
-	const rt::Camera camera(cameraPos, viewportHeight, aspectRatio, focalLength);
+	const size_t imageWidth = 400;
+	const size_t imageHeight = static_cast<int>(imageWidth / aspectRatio);
+	const size_t samplesPerPixel = 16;
 
 	// Opening the output file
 	std::ofstream out;
@@ -64,6 +59,18 @@ int main(int argc, char* argv[])
 	// PPM image format header
 	out << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
+	// RNG initialization
+	std::random_device randDevice;
+	std::default_random_engine randEngine(randDevice());
+	std::uniform_real_distribution<float> randDistribution(0.f, 1.f);
+
+	// Camera
+	const maths::Vec3 cameraPos;
+	const float viewportHeight = 2.f;
+	const float focalLength = 1.f;
+
+	const rt::Camera camera(cameraPos, viewportHeight, aspectRatio, focalLength);
+
 	// World initialization
 	rt::Hittable* spheres[3];
 	spheres[0] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f);
@@ -76,11 +83,18 @@ int main(int argc, char* argv[])
 	{
 		for (int i = 0; i < imageWidth; i++)
 		{
-			float u = float(i) / (imageWidth + 1);
-			float v = float(j) / (imageHeight + 1);
-			maths::Ray r = camera.getRay(u, v);
+			maths::Vec3 color;
 
-			maths::Vec3 color = ray_color(r, world);
+			for (size_t s = 0; s < samplesPerPixel; s++)
+			{
+				float u = (i + randDistribution(randEngine)) / (imageWidth + 1);
+				float v = (j + randDistribution(randEngine)) / (imageHeight + 1);
+				maths::Ray r = camera.getRay(u, v);
+
+				color += ray_color(r, world);
+			}
+
+			color /= float(samplesPerPixel);
 
 			out << static_cast<int>(255.999f * color.x) << ' '
 				<< static_cast<int>(255.999f * color.y) << ' '
