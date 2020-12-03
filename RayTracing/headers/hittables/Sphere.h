@@ -1,9 +1,9 @@
 #ifndef RT_SPHERE_H
 #define RT_SPHERE_H
 
-#include "hittables\Hittable.h"
-#include "maths\Vec3.h"
-#include "maths\Ray.h"
+#include "hittables/Hittable.h"
+#include "maths/Vec3.h"
+#include "maths/Ray.h"
 
 namespace rt
 {
@@ -18,7 +18,7 @@ namespace rt
 		maths::Vec3 center;
 		float radius;
 
-		bool hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
+		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
 	};
 }
 

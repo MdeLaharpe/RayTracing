@@ -1,15 +1,15 @@
-#include "hittables\Sphere.h"
+#include "hittables/Sphere.h"
 
 #include <cmath>
 
 namespace rt
 {
-	bool Sphere::hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const
+	bool Sphere::Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const
 	{
 		maths::Vec3 oc = r.origin - center;
-		float a = r.direction.magnitude_squared();
-		float halfB = maths::dot(oc, r.direction);
-		float c = oc.magnitude_squared() - radius * radius;
+		float a = r.direction.MagnitudeSquared();
+		float halfB = maths::Dot(oc, r.direction);
+		float c = oc.MagnitudeSquared() - radius * radius;
 		float discriminant = halfB * halfB - a * c;
 
 		if (discriminant < 0.f)
@@ -26,9 +26,9 @@ namespace rt
 		}
 
 		rec.t = root;
-		rec.point = r.at(root);
+		rec.point = r.At(root);
 		maths::Vec3 outwardNormal = (rec.point - center) / radius;
-		rec.setFaceNormal(r, outwardNormal);
+		rec.SetFaceNormal(r, outwardNormal);
 		return true;
 	}
 }

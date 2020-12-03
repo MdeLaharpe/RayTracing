@@ -1,7 +1,7 @@
 #ifndef MATHS_RAY_H
 #define MATHS_RAY_H
 
-#include "maths\Vec3.h"
+#include "maths/Vec3.h"
 
 namespace maths
 {
@@ -15,7 +15,7 @@ namespace maths
 		Vec3 origin;
 		Vec3 direction;
 
-		Vec3 at(float t) const
+		Vec3 At(float t) const
 		{
 			return origin + direction * t;
 		}

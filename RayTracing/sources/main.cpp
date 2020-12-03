@@ -9,13 +9,13 @@
 #include "hittables/HittableList.h"
 #include "hittables/Sphere.h"
 
-maths::Vec3 ray_color(const maths::Ray& r, const rt::HittableList& world)
+maths::Vec3 Color(const maths::Ray& r, const rt::HittableList& world)
 {
 	rt::HitRecord rec;
-	if (world.hit(r, 0.f, 1000.f, rec))
+	if (world.Hit(r, 0.f, 1000.f, rec))
 		return 0.5f * maths::Vec3(rec.normal.x + 1.f, rec.normal.y + 1.f, rec.normal.z + 1.f);
 
-	maths::Vec3 unitDirection = normalized(r.direction);
+	maths::Vec3 unitDirection = Normalized(r.direction);
 	float t = 0.5f * (unitDirection.y + 1.f);
 	return (1.f - t) * maths::Vec3(1.f, 1.f, 1.f) + t * maths::Vec3(0.5f, 0.7f, 1.f);
 }
@@ -55,10 +55,11 @@ int main(int argc, char* argv[])
 	const rt::Camera camera(cameraPos, viewportHeight, aspectRatio, focalLength);
 
 	// World initialization
-	rt::Hittable* spheres[3];
-	spheres[0] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f);
-	spheres[1] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f);
-	spheres[2] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f);
+	rt::Hittable* spheres[4];
+	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -1000.f, -1.f), 500.f);
+	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f);
+	spheres[2] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f);
+	spheres[3] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f);
 	rt::HittableList world(spheres, 3);
 
 	// Render
@@ -72,9 +73,9 @@ int main(int argc, char* argv[])
 			{
 				float u = (i + randDistribution(randEngine)) / (imageWidth + 1);
 				float v = (j + randDistribution(randEngine)) / (imageHeight + 1);
-				maths::Ray r = camera.getRay(u, v);
+				maths::Ray r = camera.GetRay(u, v);
 
-				color += ray_color(r, world);
+				color += Color(r, world);
 			}
 
 			color /= float(samplesPerPixel);

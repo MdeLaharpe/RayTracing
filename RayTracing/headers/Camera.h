@@ -17,7 +17,7 @@ namespace rt
 		maths::Vec3 viewportHorizontal;
 		maths::Vec3 viewportVertical;
 
-		maths::Ray getRay(float u, float v) const;
+		maths::Ray GetRay(float u, float v) const;
 	};
 }
 

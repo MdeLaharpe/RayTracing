@@ -11,7 +11,7 @@ namespace rt
 		viewportMinCornerPos = position - viewportHorizontal * 0.5f - viewportVertical * 0.5f - maths::Vec3(0.f, 0.f, focalLength);
 	}
 
-	maths::Ray Camera::getRay(float u, float v) const
+	maths::Ray Camera::GetRay(float u, float v) const
 	{
 		return maths::Ray(position, viewportMinCornerPos + u * viewportHorizontal + v * viewportVertical - position);
 	}

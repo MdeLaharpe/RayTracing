@@ -14,7 +14,7 @@ namespace rt
 		Hittable** list;
 		size_t size;
 
-		bool hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
+		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
 	};
 }
 

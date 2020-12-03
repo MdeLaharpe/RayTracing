@@ -15,9 +15,9 @@ namespace rt
 		float t;
 		bool frontFace;
 
-		inline void setFaceNormal(const maths::Ray& r, const maths::Vec3& outwardNormal)
+		inline void SetFaceNormal(const maths::Ray& r, const maths::Vec3& outwardNormal)
 		{
-			frontFace = dot(r.direction, outwardNormal) < 0.f;
+			frontFace = Dot(r.direction, outwardNormal) < 0.f;
 			normal = frontFace ? outwardNormal : -outwardNormal;
 		}
 	};
@@ -25,7 +25,7 @@ namespace rt
 	class Hittable
 	{
 	public:
-		virtual bool hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const = 0;
+		virtual bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const = 0;
 	};
 }
 
