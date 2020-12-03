@@ -151,11 +151,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="sources\Camera.cpp" />
     <ClCompile Include="sources\hittables\HittableList.cpp" />
     <ClCompile Include="sources\hittables\Sphere.cpp" />
     <ClCompile Include="sources\main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="headers\Camera.h" />
     <ClInclude Include="headers\hittables\Hittable.h" />
     <ClInclude Include="headers\hittables\HittableList.h" />
     <ClInclude Include="headers\hittables\Sphere.h" />

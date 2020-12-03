@@ -33,6 +33,9 @@
     <ClCompile Include="sources\hittables\HittableList.cpp">
       <Filter>Source Files\Hittables</Filter>
     </ClCompile>
+    <ClCompile Include="sources\Camera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\maths\Vec3.h">
@@ -49,6 +52,9 @@
     </ClInclude>
     <ClInclude Include="headers\hittables\HittableList.h">
       <Filter>Header Files\Hittables</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\Camera.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

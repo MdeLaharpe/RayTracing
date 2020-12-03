@@ -4,6 +4,7 @@
 
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
+#include "Camera.h"
 #include "hittables/HittableList.h"
 #include "hittables/Sphere.h"
 
@@ -45,14 +46,11 @@ int main(int argc, char* argv[])
 	const int imageHeight = static_cast<int>(imageWidth / aspectRatio);
 
 	// Camera
+	const maths::Vec3 cameraPos;
 	const float viewportHeight = 2.f;
-	const float viewportWidth = viewportHeight * aspectRatio;
 	const float focalLength = 1.f;
 
-	const maths::Vec3 eyePos = maths::Vec3();
-	const maths::Vec3 horizontal = maths::Vec3(viewportWidth, 0.f, 0.f);
-	const maths::Vec3 vertical = maths::Vec3(0.f, viewportHeight, 0.f);
-	const maths::Vec3 lowerLeftCorner = eyePos - horizontal / 2.f - vertical / 2.f - maths::Vec3(0.f, 0.f, focalLength);
+	const rt::Camera camera(cameraPos, viewportHeight, aspectRatio, focalLength);
 
 	// Opening the output file
 	std::ofstream out;
@@ -80,7 +78,7 @@ int main(int argc, char* argv[])
 		{
 			float u = float(i) / (imageWidth + 1);
 			float v = float(j) / (imageHeight + 1);
-			maths::Ray r(eyePos, lowerLeftCorner + u * horizontal + v * vertical - eyePos);
+			maths::Ray r = camera.getRay(u, v);
 
 			maths::Vec3 color = ray_color(r, world);
 
