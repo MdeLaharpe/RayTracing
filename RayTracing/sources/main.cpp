@@ -62,9 +62,9 @@ int main(int argc, char* argv[])
 	// World initialization
 	rt::Hittable** spheres = new rt::Hittable*[4];
 	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, new rt::Lambertian(maths::Vec3(0.8f, 0.8f, 0.f)));
-	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.8f, 0.8f)));
+	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.8f, 0.8f), 0.3f));
 	spheres[2] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f, new rt::Lambertian(maths::Vec3(0.8f, 0.3f, 0.3f)));
-	spheres[3] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.6f, 0.2f)));
+	spheres[3] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f));
 	rt::HittableList world(spheres, 4);
 
 	// Render
