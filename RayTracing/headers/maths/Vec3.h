@@ -134,9 +134,8 @@ namespace maths
 	{
 		return v - 2.f * Dot(v, normal) * normal;
 	}
-	inline Vec3 Refract(const Vec3& v, const Vec3& normal, float refIndicesRatio)
+	inline Vec3 Refracted(const Vec3& v, const Vec3& normal, float cosTheta, float refIndicesRatio)
 	{
-		float cosTheta = std::min(maths::Dot(-v, normal), 1.f);
 		maths::Vec3 outPerp = refIndicesRatio * (v + cosTheta * normal);
 		maths::Vec3 outPara = -std::sqrtf(std::fabs(1.f - outPerp.MagnitudeSquared())) * normal;
 		return outPerp + outPara;
