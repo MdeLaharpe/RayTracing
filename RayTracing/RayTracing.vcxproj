@@ -170,6 +170,7 @@
     <ClInclude Include="headers\materials\Material.h" />
     <ClInclude Include="headers\materials\Metal.h" />
     <ClInclude Include="headers\maths\Ray.h" />
+    <ClInclude Include="headers\maths\Utils.h" />
     <ClInclude Include="headers\maths\Vec3.h" />
     <ClInclude Include="headers\Random.h" />
   </ItemGroup>

@@ -89,5 +89,8 @@
     <ClInclude Include="headers\materials\Dielectric.h">
       <Filter>Header Files\Materials</Filter>
     </ClInclude>
+    <ClInclude Include="headers\maths\Utils.h">
+      <Filter>Header Files\Maths</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -55,10 +55,10 @@ int main(int argc, char* argv[])
 
 	// Camera
 	const maths::Vec3 cameraPos;
-	const float viewportHeight = 2.f;
+	const float verticalFovDeg = 90.f;
 	const float focalLength = 1.f;
 
-	const rt::Camera camera(cameraPos, viewportHeight, aspectRatio, focalLength);
+	const rt::Camera camera(cameraPos, verticalFovDeg, aspectRatio, focalLength);
 
 	// World initialization
 	rt::Hittable** spheres = new rt::Hittable*[4];
