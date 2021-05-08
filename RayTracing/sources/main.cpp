@@ -58,9 +58,10 @@ int main(int argc, char* argv[])
 	const maths::Vec3 lookAt{ 0.f, 0.f, -1.f };
 	const maths::Vec3 up{ 0.f, 1.f, 0.f };
 	const float verticalFovDeg = 90.f;
-	const float focalLength = 1.f;
+	const float aperture = 0.5f;
+	const float focusDist = (cameraPos - lookAt).Magnitude();
 
-	const rt::Camera camera(cameraPos, lookAt, up, verticalFovDeg, aspectRatio, focalLength);
+	const rt::Camera camera(cameraPos, lookAt, up, verticalFovDeg, aspectRatio, aperture, focusDist);
 
 	// World initialization
 	rt::Hittable** spheres = new rt::Hittable*[5];
