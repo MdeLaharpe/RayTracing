@@ -9,8 +9,8 @@ namespace rt
 	class Camera
 	{
 	public:
-		Camera() : Camera(maths::Vec3(), 2.f, 16.f / 9.f, 1.f) { }
-		Camera(const maths::Vec3& position, float verticalFovDeg, float aspectRatio, float focalLength);
+		Camera() : Camera({}, { 0.f, 0.f, -1.f }, { 0.f, 1.f, 0.f }, 2.f, 16.f / 9.f, 1.f) { }
+		Camera(const maths::Vec3& position, const maths::Vec3& lookAt, const maths::Vec3& up, float verticalFovDeg, float aspectRatio, float focalLength);
 
 		maths::Vec3 position;
 		maths::Vec3 viewportMinCornerPos;

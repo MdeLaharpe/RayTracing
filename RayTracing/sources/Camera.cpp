@@ -6,14 +6,19 @@
 
 namespace rt
 {
-	Camera::Camera(const maths::Vec3& position, float verticalFovDeg, float aspectRatio, float focalLength)
+	Camera::Camera(const maths::Vec3& position, const maths::Vec3& lookAt, const maths::Vec3& up, float verticalFovDeg, float aspectRatio, float focalLength)
 		: position(position)
 	{
 		const float viewportHeight = 2.f * focalLength * std::tanf(maths::DegToRad(verticalFovDeg) * 0.5f);
 		const float viewportWidth = viewportHeight * aspectRatio;
-		viewportHorizontal = maths::Vec3(viewportWidth, 0.f, 0.f);
-		viewportVertical = maths::Vec3(0.f, viewportHeight, 0.f);
-		viewportMinCornerPos = position - viewportHorizontal * 0.5f - viewportVertical * 0.5f - maths::Vec3(0.f, 0.f, focalLength);
+
+		const maths::Vec3 w = maths::Normalized(position - lookAt);
+		const maths::Vec3 u = maths::Normalized(maths::Cross(up, w));
+		const maths::Vec3 v = maths::Cross(w, u);
+
+		viewportHorizontal = viewportWidth * u;
+		viewportVertical = viewportHeight * v;
+		viewportMinCornerPos = position - viewportHorizontal * 0.5f - viewportVertical * 0.5f - focalLength * w;
 	}
 
 	maths::Ray Camera::GetRay(float u, float v) const

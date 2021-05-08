@@ -54,19 +54,22 @@ int main(int argc, char* argv[])
 	out << "P3\n" << imageWidth << ' ' << imageHeight << "\n255\n";
 
 	// Camera
-	const maths::Vec3 cameraPos;
+	const maths::Vec3 cameraPos{ -2.f, 2.f, 1.f };
+	const maths::Vec3 lookAt{ 0.f, 0.f, -1.f };
+	const maths::Vec3 up{ 0.f, 1.f, 0.f };
 	const float verticalFovDeg = 90.f;
 	const float focalLength = 1.f;
 
-	const rt::Camera camera(cameraPos, verticalFovDeg, aspectRatio, focalLength);
+	const rt::Camera camera(cameraPos, lookAt, up, verticalFovDeg, aspectRatio, focalLength);
 
 	// World initialization
-	rt::Hittable** spheres = new rt::Hittable*[4];
+	rt::Hittable** spheres = new rt::Hittable*[5];
 	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, new rt::Lambertian(maths::Vec3(0.8f, 0.8f, 0.f)));
 	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, new rt::Dielectric(1.5f));
-	spheres[2] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f, new rt::Lambertian(maths::Vec3(0.8f, 0.3f, 0.3f)));
-	spheres[3] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f));
-	rt::HittableList world(spheres, 4);
+	spheres[2] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, new rt::Dielectric(1.5f));
+	spheres[3] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f, new rt::Lambertian(maths::Vec3(0.8f, 0.3f, 0.3f)));
+	spheres[4] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f));
+	rt::HittableList world(spheres, 5);
 
 	// Render
 	for (int j = imageHeight - 1; j >= 0; j--)
