@@ -7,7 +7,7 @@ namespace rt
 	bool Metal::Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const
 	{
 		maths::Vec3 reflected = maths::Reflected(maths::Normalized(rayIn.direction), rec.normal);
-		scattered = maths::Ray(rec.point, reflected + fuzz * RandInUnitSphere());
+		scattered = maths::Ray(rec.point, reflected + fuzz * RandInUnitSphere(), rayIn.time);
 		attenuation = albedo;
 		return maths::Dot(reflected, rec.normal) > 0.f;
 	}

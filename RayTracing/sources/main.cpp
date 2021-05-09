@@ -8,6 +8,7 @@
 #include "Camera.h"
 #include "hittables/HittableList.h"
 #include "hittables/Sphere.h"
+#include "hittables/MovingSphere.h"
 #include "materials/Lambertian.h"
 #include "materials/Metal.h"
 #include "materials/Dielectric.h"
@@ -58,17 +59,17 @@ int main(int argc, char* argv[])
 	const maths::Vec3 lookAt{ 0.f, 0.f, -1.f };
 	const maths::Vec3 up{ 0.f, 1.f, 0.f };
 	const float verticalFovDeg = 90.f;
-	const float aperture = 0.5f;
+	const float aperture = 0.01f;
 	const float focusDist = (cameraPos - lookAt).Magnitude();
 
-	const rt::Camera camera(cameraPos, lookAt, up, verticalFovDeg, aspectRatio, aperture, focusDist);
+	const rt::Camera camera(cameraPos, lookAt, up, verticalFovDeg, aspectRatio, aperture, focusDist, 0.f, 1.f);
 
 	// World initialization
 	rt::Hittable** spheres = new rt::Hittable*[5];
 	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, new rt::Lambertian(maths::Vec3(0.8f, 0.8f, 0.f)));
 	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, new rt::Dielectric(1.5f));
 	spheres[2] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, new rt::Dielectric(1.5f));
-	spheres[3] = new rt::Sphere(maths::Vec3(0.f, 0.f, -1.f), 0.5f, new rt::Lambertian(maths::Vec3(0.8f, 0.3f, 0.3f)));
+	spheres[3] = new rt::MovingSphere(maths::Vec3(0.f, 0.f, -1.f), maths::Vec3(0.f, 1.f, -1.f), 0.f, 1.f, 0.5f, new rt::Lambertian(maths::Vec3(0.8f, 0.3f, 0.3f)));
 	spheres[4] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f));
 	rt::HittableList world(spheres, 5);
 

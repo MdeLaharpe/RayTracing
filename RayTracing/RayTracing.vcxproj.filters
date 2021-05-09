@@ -54,6 +54,9 @@
     <ClCompile Include="sources\materials\Dielectric.cpp">
       <Filter>Source Files\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="sources\hittables\MovingSphere.cpp">
+      <Filter>Source Files\Hittables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\maths\Vec3.h">
@@ -91,6 +94,9 @@
     </ClInclude>
     <ClInclude Include="headers\maths\Utils.h">
       <Filter>Header Files\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\hittables\MovingSphere.h">
+      <Filter>Header Files\Hittables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -140,6 +140,10 @@ namespace maths
 		maths::Vec3 outPara = -std::sqrtf(std::fabs(1.f - outPerp.MagnitudeSquared())) * normal;
 		return outPerp + outPara;
 	}
+	inline Vec3 Lerp(const Vec3& from, const Vec3& to, float t)
+	{
+		return from + t * (to - from);
+	}
 
 	inline std::ostream& operator <<(std::ostream& out, const Vec3& v)
 	{

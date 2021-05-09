@@ -31,7 +31,7 @@ namespace rt
 		else
 			outDirection = maths::Refracted(inDirection, rec.normal, cosTheta, refIndicesRatio);
 
-		scattered = maths::Ray(rec.point, outDirection);
+		scattered = maths::Ray(rec.point, outDirection, rayIn.time);
 		return true;
 	}
 }

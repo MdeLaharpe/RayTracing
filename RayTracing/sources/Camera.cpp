@@ -7,8 +7,8 @@
 
 namespace rt
 {
-	Camera::Camera(const maths::Vec3& position, const maths::Vec3& lookAt, const maths::Vec3& up, float verticalFovDeg, float aspectRatio, float aperture, float focusDist)
-		: position(position), lensRadius(aperture * 0.5f)
+	Camera::Camera(const maths::Vec3& position, const maths::Vec3& lookAt, const maths::Vec3& up, float verticalFovDeg, float aspectRatio, float aperture, float focusDist, float time0, float time1)
+		: position(position), lensRadius(aperture * 0.5f), time0(time0), time1(time1)
 	{
 		k = maths::Normalized(position - lookAt);
 		i = maths::Normalized(maths::Cross(up, k));
@@ -27,6 +27,6 @@ namespace rt
 		const maths::Vec3 lens = lensRadius * RandInUnitDisk();
 		const maths::Vec3 offset = i * lens.x + j * lens.y;
 		const maths::Vec3 rayOrigin = position + offset;
-		return maths::Ray(rayOrigin, viewportMinCornerPos + u * viewportHorizontal + v * viewportVertical - rayOrigin);
+		return maths::Ray(rayOrigin, viewportMinCornerPos + u * viewportHorizontal + v * viewportVertical - rayOrigin, Rand(time0, time1));
 	}
 }

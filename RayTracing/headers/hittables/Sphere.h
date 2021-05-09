@@ -12,7 +12,7 @@ namespace rt
 	{
 	public:
 		constexpr Sphere() : center(), radius(1.f), material(nullptr) { }
-		constexpr Sphere(const maths::Vec3& center, float radius, Material* material)
+		constexpr Sphere(const maths::Vec3& center, float radius, const Material* material)
 			: center(center), radius(radius), material(material)
 		{ }
 
@@ -23,7 +23,7 @@ namespace rt
 	private:
 		maths::Vec3 center;
 		float radius;
-		Material* material;
+		const Material* material;
 	};
 }
 

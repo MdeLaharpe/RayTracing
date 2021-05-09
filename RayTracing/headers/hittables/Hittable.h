@@ -16,7 +16,7 @@ namespace rt
 		maths::Vec3 normal;
 		float t;
 		bool frontFace;
-		Material* material;
+		const Material* material;
 
 		inline void SetFaceNormal(const maths::Ray& r, const maths::Vec3& outwardNormal)
 		{
