@@ -28,6 +28,9 @@
     <Filter Include="Source Files\Materials">
       <UniqueIdentifier>{f45433e8-59a7-47f7-b6a2-9c3270d2725e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Maths">
+      <UniqueIdentifier>{0e2f7e55-9f16-4f9a-9aa4-9069a65d6bac}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -56,6 +59,9 @@
     </ClCompile>
     <ClCompile Include="sources\hittables\MovingSphere.cpp">
       <Filter>Source Files\Hittables</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\maths\AABB.cpp">
+      <Filter>Source Files\Maths</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -97,6 +103,9 @@
     </ClInclude>
     <ClInclude Include="headers\hittables\MovingSphere.h">
       <Filter>Header Files\Hittables</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\maths\AABB.h">
+      <Filter>Header Files\Maths</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
