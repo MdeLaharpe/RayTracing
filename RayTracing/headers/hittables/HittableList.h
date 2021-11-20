@@ -3,18 +3,19 @@
 
 #include "hittables/Hittable.h"
 
+#include <vector>
+
 namespace rt
 {
 	class HittableList : public Hittable
 	{
 	public:
-		constexpr HittableList() : list(nullptr), size(0) { }
-		constexpr HittableList(Hittable** list, size_t size) : list(list), size(size) { }
+		HittableList() : list() { }
+		HittableList(std::vector<std::shared_ptr<Hittable>>&& list) : list(std::move(list)) { }
 
-		virtual ~HittableList();
+		virtual ~HittableList() { }
 
-		Hittable** list;
-		size_t size;
+		std::vector<std::shared_ptr<Hittable>> list;
 
 		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
 	};

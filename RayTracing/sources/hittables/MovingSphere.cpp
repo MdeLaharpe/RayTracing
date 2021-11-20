@@ -2,11 +2,6 @@
 
 namespace rt
 {
-	MovingSphere::~MovingSphere()
-	{
-		delete material;
-	}
-
 	bool MovingSphere::Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const
 	{
 		float lerpFactor = (r.time - time0) / (time1 - time0);

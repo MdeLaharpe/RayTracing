@@ -4,11 +4,6 @@
 
 namespace rt
 {
-	Sphere::~Sphere()
-	{
-		delete material;
-	}
-
 	bool Sphere::Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const
 	{
 		maths::Vec3 oc = r.origin - center;

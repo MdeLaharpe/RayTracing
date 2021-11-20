@@ -12,18 +12,18 @@ namespace rt
 	{
 	public:
 		constexpr Sphere() : center(), radius(1.f), material(nullptr) { }
-		constexpr Sphere(const maths::Vec3& center, float radius, const Material* material)
-			: center(center), radius(radius), material(material)
+		Sphere(const maths::Vec3& center, float radius, std::shared_ptr<const Material> material)
+			: center(center), radius(radius), material(std::move(material))
 		{ }
 
-		virtual ~Sphere();
+		virtual ~Sphere() { }
 
 		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
 
 	private:
 		maths::Vec3 center;
 		float radius;
-		const Material* material;
+		std::shared_ptr<const Material> material;
 	};
 }
 

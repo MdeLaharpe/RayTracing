@@ -1,6 +1,8 @@
 #ifndef RT_HITTABLE_H
 #define RT_HITTABLE_H
 
+#include <memory>
+
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
 
@@ -16,7 +18,7 @@ namespace rt
 		maths::Vec3 normal;
 		float t;
 		bool frontFace;
-		const Material* material;
+		std::shared_ptr<const Material> material;
 
 		inline void SetFaceNormal(const maths::Ray& r, const maths::Vec3& outwardNormal)
 		{

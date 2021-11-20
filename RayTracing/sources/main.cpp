@@ -1,6 +1,7 @@
 #include <iostream>
 #include <fstream>
 #include <cmath>
+#include <vector>
 
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
@@ -33,7 +34,7 @@ maths::Vec3 Color(const maths::Ray& r, const rt::HittableList& world, size_t dep
 
 int main(int argc, char* argv[])
 {
-	const char* outputFileName = "out.ppm";
+	const std::string outputFileName{ "out.ppm" };
 
 	// Image
 	const float aspectRatio = 16.f / 9.f;
@@ -65,13 +66,14 @@ int main(int argc, char* argv[])
 	const rt::Camera camera(cameraPos, lookAt, up, verticalFovDeg, aspectRatio, aperture, focusDist, 0.f, 1.f);
 
 	// World initialization
-	rt::Hittable** spheres = new rt::Hittable*[5];
-	spheres[0] = new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, new rt::Lambertian(maths::Vec3(0.8f, 0.8f, 0.f)));
-	spheres[1] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, new rt::Dielectric(1.5f));
-	spheres[2] = new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, new rt::Dielectric(1.5f));
-	spheres[3] = new rt::MovingSphere(maths::Vec3(0.f, 0.f, -1.f), maths::Vec3(0.f, 1.f, -1.f), 0.f, 1.f, 0.5f, new rt::Lambertian(maths::Vec3(0.8f, 0.3f, 0.3f)));
-	spheres[4] = new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, new rt::Metal(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f));
-	rt::HittableList world(spheres, 5);
+	std::vector<std::shared_ptr<rt::Hittable>> spheres;
+	spheres.reserve(5);
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, std::make_shared<rt::Lambertian>(maths::Vec3(0.8f, 0.8f, 0.f))));
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Dielectric>(1.5f)));
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, std::make_shared<rt::Dielectric>(1.5f)));
+	spheres.emplace_back(new rt::MovingSphere(maths::Vec3(0.f, 0.f, -1.f), maths::Vec3(0.f, 1.f, -1.f), time0, time1, 0.5f, std::make_shared<rt::Lambertian>(maths::Vec3(0.8f, 0.3f, 0.3f))));
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Metal>(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f)));
+	const rt::HittableList world(std::move(spheres));
 
 	// Render
 	for (int j = imageHeight - 1; j >= 0; j--)
