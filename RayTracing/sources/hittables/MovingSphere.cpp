@@ -2,10 +2,20 @@
 
 namespace rt
 {
+	bool MovingSphere::BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const
+	{
+		maths::Vec3 minCenter = CenterAt(tMin);
+		maths::AABB minAABB{ minCenter - maths::Vec3(radius), minCenter + maths::Vec3(radius) };
+		maths::Vec3 maxCenter = CenterAt(tMax);
+		maths::AABB maxAABB{ maxCenter - maths::Vec3(radius), maxCenter + maths::Vec3(radius) };
+
+		outAABB = Bound(minAABB, maxAABB);
+		return true;
+	}
+
 	bool MovingSphere::Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const
 	{
-		float lerpFactor = (r.time - time0) / (time1 - time0);
-		const maths::Vec3 center = maths::Lerp(center0, center1, lerpFactor);
+		maths::Vec3 center = CenterAt(r.time);
 
 		maths::Vec3 oc = r.origin - center;
 		float a = r.direction.MagnitudeSquared();
@@ -32,5 +42,11 @@ namespace rt
 		rec.SetFaceNormal(r, outwardNormal);
 		rec.material = material;
 		return true;
+	}
+
+	maths::Vec3 MovingSphere::CenterAt(float t) const
+	{
+		float lerpFactor = (t - time0) / (time1 - time0);
+		return maths::Lerp(center0, center1, lerpFactor);
 	}
 }

@@ -7,6 +7,7 @@ namespace rt
 {
 	float Rand01();
 	float Rand(float min, float max);
+	int32_t Rand(int32_t min, int32_t max);
 	maths::Vec3 RandInUnitDisk();
 	maths::Vec3 RandInUnitSphere();
 }

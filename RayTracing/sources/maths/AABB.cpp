@@ -1,5 +1,7 @@
 #include "maths/AABB.h"
 
+#include <utility>
+
 namespace maths
 {
 	bool AABB::Hit(const Ray& r, float tMin, float tMax) const
@@ -20,5 +22,22 @@ namespace maths
 				return false;
 		}
 		return true;
+	}
+
+	AABB Bound(const AABB& aabb0, const AABB& aabb1)
+	{
+		return AABB(
+			Vec3(
+				std::min(aabb0.minimum.x, aabb1.minimum.x),
+				std::min(aabb0.minimum.y, aabb1.minimum.y),
+				std::min(aabb0.minimum.z, aabb1.minimum.z)
+			),
+			Vec3(
+				std::max(aabb0.maximum.x, aabb1.maximum.x),
+				std::max(aabb0.maximum.y, aabb1.maximum.y),
+				std::max(aabb0.maximum.z, aabb1.maximum.z)
+			)
+		);
+
 	}
 }

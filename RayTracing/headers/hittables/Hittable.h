@@ -5,6 +5,7 @@
 
 #include "maths/Vec3.h"
 #include "maths/Ray.h"
+#include "maths/AABB.h"
 
 namespace rt
 {
@@ -32,6 +33,7 @@ namespace rt
 	public:
 		virtual ~Hittable() = default;
 
+		virtual bool BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const = 0;
 		virtual bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const = 0;
 	};
 }

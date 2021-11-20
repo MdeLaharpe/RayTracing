@@ -16,6 +16,8 @@ namespace maths
 
 		bool Hit(const Ray& r, float tMin, float tMax) const;
 	};
+
+	AABB Bound(const AABB& aabb0, const AABB& aabb1);
 }
 
 #endif MATHS_AABB_H

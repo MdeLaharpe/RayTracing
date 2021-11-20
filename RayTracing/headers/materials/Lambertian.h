@@ -4,6 +4,8 @@
 #include "materials/Material.h"
 #include "maths/Vec3.h"
 
+#include <memory>
+
 namespace rt
 {
 	class Lambertian : public Material

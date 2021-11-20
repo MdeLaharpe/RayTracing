@@ -11,6 +11,9 @@ namespace rt
 	public:
 		Camera(const maths::Vec3& position, const maths::Vec3& lookAt, const maths::Vec3& up, float verticalFovDeg, float aspectRatio, float aperture, float focusDist, float time0, float time1);
 
+		maths::Ray GetRay(float u, float v) const;
+
+	private:
 		maths::Vec3 position;
 		maths::Vec3 i, j, k;
 		maths::Vec3 viewportMinCornerPos;
@@ -19,7 +22,6 @@ namespace rt
 		float lensRadius;
 		float time0, time1;
 
-		maths::Ray GetRay(float u, float v) const;
 	};
 }
 

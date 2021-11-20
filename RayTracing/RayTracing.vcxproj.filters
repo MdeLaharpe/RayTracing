@@ -63,6 +63,9 @@
     <ClCompile Include="sources\maths\AABB.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
+    <ClCompile Include="sources\hittables\BVHNode.cpp">
+      <Filter>Source Files\Hittables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\maths\Vec3.h">
@@ -106,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="headers\maths\AABB.h">
       <Filter>Header Files\Maths</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\hittables\BVHNode.h">
+      <Filter>Header Files\Hittables</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

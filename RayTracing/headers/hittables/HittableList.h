@@ -15,9 +15,11 @@ namespace rt
 
 		virtual ~HittableList() { }
 
-		std::vector<std::shared_ptr<Hittable>> list;
-
+		bool BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const override;
 		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
+
+	private:
+		std::vector<std::shared_ptr<Hittable>> list;
 	};
 }
 

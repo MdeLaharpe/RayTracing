@@ -18,6 +18,11 @@ namespace rt
 		return Rand01() * (max - min) + min;
 	}
 
+	int32_t Rand(int32_t min, int32_t max)
+	{
+		return static_cast<int32_t>(Rand(static_cast<float>(min), static_cast<float>(max) + 1));
+	}
+
 	maths::Vec3 RandInUnitDisk()
 	{
 		maths::Vec3 point;

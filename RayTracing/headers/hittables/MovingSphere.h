@@ -16,9 +16,12 @@ namespace rt
 
 		virtual ~MovingSphere() { }
 
+		bool BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const override;
 		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
 
 	private:
+		maths::Vec3 CenterAt(float t) const;
+
 		maths::Vec3 center0, center1;
 		float time0, time1;
 		float radius;

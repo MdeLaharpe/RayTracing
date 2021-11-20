@@ -4,6 +4,12 @@
 
 namespace rt
 {
+	bool Sphere::BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const
+	{
+		outAABB = maths::AABB(center - maths::Vec3(radius), center + maths::Vec3(radius));
+		return true;
+	}
+
 	bool Sphere::Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const
 	{
 		maths::Vec3 oc = r.origin - center;
