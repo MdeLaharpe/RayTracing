@@ -31,6 +31,12 @@
     <Filter Include="Source Files\Maths">
       <UniqueIdentifier>{0e2f7e55-9f16-4f9a-9aa4-9069a65d6bac}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{283585c2-16d8-46fe-902f-f0b8a7231371}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Textures">
+      <UniqueIdentifier>{d570714e-afc3-4583-8360-cb97cccba461}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -65,6 +71,12 @@
     </ClCompile>
     <ClCompile Include="sources\hittables\BVHNode.cpp">
       <Filter>Source Files\Hittables</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\textures\SolidColor.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\maths\Utils.cpp">
+      <Filter>Source Files\Maths</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -112,6 +124,12 @@
     </ClInclude>
     <ClInclude Include="headers\hittables\BVHNode.h">
       <Filter>Header Files\Hittables</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\textures\SolidColor.h">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\textures\Texture.h">
+      <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

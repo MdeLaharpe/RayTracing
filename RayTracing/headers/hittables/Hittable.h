@@ -13,11 +13,12 @@ namespace rt
 
 	struct HitRecord
 	{
-		constexpr HitRecord() : point(), normal(), t(0.f), frontFace(true), material(nullptr) { }
+		constexpr HitRecord() : point(), normal(), t(0.f), u(0.f), v(0.f), frontFace(true), material(nullptr) { }
 
 		maths::Vec3 point;
 		maths::Vec3 normal;
 		float t;
+		float u, v;
 		bool frontFace;
 		std::shared_ptr<const Material> material;
 

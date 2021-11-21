@@ -8,7 +8,7 @@ namespace rt
 	{
 		maths::Vec3 target = rec.point + rec.normal + RandInUnitSphere();
 		scattered = maths::Ray(rec.point, target - rec.point, rayIn.time);
-		attenuation = albedo;
+		attenuation = albedo->Value(rec.u, rec.v, rec.point);
 		return true;
 	}
 }

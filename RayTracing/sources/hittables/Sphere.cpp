@@ -2,6 +2,8 @@
 
 #include <cmath>
 
+#include "maths/Utils.h"
+
 namespace rt
 {
 	bool Sphere::BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const
@@ -35,6 +37,10 @@ namespace rt
 		rec.point = r.At(root);
 		maths::Vec3 outwardNormal = (rec.point - center) / radius;
 		rec.SetFaceNormal(r, outwardNormal);
+		float theta, phi;
+		maths::SphereSurfaceNormalToPolarCoordinates(outwardNormal, theta, phi);
+		rec.u = phi / (2.f * maths::pi);
+		rec.v = theta / maths::pi;
 		rec.material = material;
 		return true;
 	}

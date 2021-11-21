@@ -10,7 +10,7 @@ namespace rt
 	class BVHNode : public Hittable
 	{
 	public:
-		constexpr BVHNode() : left(nullptr), right(nullptr), aabb() { };
+		constexpr BVHNode() : left(nullptr), right(nullptr), aabb() { }
 		BVHNode(std::vector<std::shared_ptr<Hittable>>& list, size_t start, size_t end, float time0, float time1);
 
 		virtual bool BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const override;

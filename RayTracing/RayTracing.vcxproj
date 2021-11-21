@@ -165,7 +165,9 @@
     <ClCompile Include="sources\materials\Lambertian.cpp" />
     <ClCompile Include="sources\materials\Metal.cpp" />
     <ClCompile Include="sources\maths\AABB.cpp" />
+    <ClCompile Include="sources\maths\Utils.cpp" />
     <ClCompile Include="sources\Random.cpp" />
+    <ClCompile Include="sources\textures\SolidColor.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Camera.h" />
@@ -183,6 +185,8 @@
     <ClInclude Include="headers\maths\Utils.h" />
     <ClInclude Include="headers\maths\Vec3.h" />
     <ClInclude Include="headers\Random.h" />
+    <ClInclude Include="headers\textures\SolidColor.h" />
+    <ClInclude Include="headers\textures\Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

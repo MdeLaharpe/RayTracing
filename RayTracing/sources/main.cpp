@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 
 	// Image
 	const float aspectRatio = 16.f / 9.f;
-	const size_t imageWidth = 1920;
+	const size_t imageWidth = 400;
 	const size_t imageHeight = static_cast<int>(imageWidth / aspectRatio);
 	const size_t samplesPerPixel = 16;
 	const size_t depthMax = 10;
@@ -69,48 +69,12 @@ int main(int argc, char* argv[])
 
 	// World initialization
 	std::vector<std::shared_ptr<rt::Hittable>> spheres;
-	spheres.reserve(445);
+	spheres.reserve(5);
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, std::make_shared<rt::Lambertian>(maths::Vec3(0.8f, 0.8f, 0.f))));
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Dielectric>(1.5f)));
-	//spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, std::make_shared<rt::Dielectric>(1.5f)));
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, std::make_shared<rt::Dielectric>(1.5f)));
 	spheres.emplace_back(new rt::MovingSphere(maths::Vec3(0.f, 0.f, -1.f), maths::Vec3(0.f, 1.f, -1.f), time0, time1, 0.5f, std::make_shared<rt::Lambertian>(maths::Vec3(0.8f, 0.3f, 0.3f))));
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Metal>(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f)));
-
-	for (float a = 0.f; a <= 20.f; a += 1.f)
-	{
-		for (float b = 0.f; b <= 20.f; b += 1.f)
-		{
-			float chooseMaterial = rt::Rand01();
-
-			const float radius = 0.1f;
-			const maths::Vec3 center{ a - 10.f + rt::Rand(-0.8f, 0.8f), 0.05f, b - 10.f + rt::Rand(-0.8f, 0.8f) };
-
-			std::shared_ptr<rt::Material> material{ nullptr };
-			if (chooseMaterial < 0.8f)
-			{
-				maths::Vec3 albedo{ rt::Rand01() * rt::Rand01(), rt::Rand01() * rt::Rand01(), rt::Rand01() * rt::Rand01() };
-				material = std::make_shared<rt::Lambertian>(albedo);
-			}
-			else if (chooseMaterial < 0.95f)
-			{
-				maths::Vec3 albedo{ rt::Rand(0.5f, 1.f) };
-				float fuzz = rt::Rand(0.f, 0.5f);
-				material = std::make_shared<rt::Metal>(albedo, fuzz);
-			}
-			else
-			{
-				float refIndex = rt::Rand(1.2f, 1.8f);
-				material = std::make_shared<rt::Dielectric>(refIndex);
-			}
-
-			float chooseShape = rt::Rand01();
-
-			if (chooseShape < 0.9f)
-				spheres.emplace_back(new rt::Sphere(center, radius, material));
-			else
-				spheres.emplace_back(new rt::MovingSphere(center, center + maths::Vec3(0.f, 0.1f, 0.f), time0, time1, radius, material));
-		}
-	}
 
 	const rt::BVHNode world(spheres, 0, spheres.size(), time0, time1);
 
