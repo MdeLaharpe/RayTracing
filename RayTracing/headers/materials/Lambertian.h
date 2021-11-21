@@ -14,7 +14,7 @@ namespace rt
 		constexpr Lambertian() : albedo() { };
 		constexpr Lambertian(const maths::Vec3& albedo) : albedo(albedo) { };
 
-		bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const override;
+		virtual bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const override;
 
 	private:
 		maths::Vec3 albedo;

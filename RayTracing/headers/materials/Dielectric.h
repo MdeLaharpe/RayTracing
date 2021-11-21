@@ -13,7 +13,7 @@ namespace rt
 		constexpr Dielectric() : refIndex(1.f) { }
 		Dielectric(float refIndex) : refIndex(refIndex) { }
 
-		bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const override;
+		virtual bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const override;
 
 	private:
 		float refIndex;

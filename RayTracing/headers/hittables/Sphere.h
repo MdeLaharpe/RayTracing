@@ -18,8 +18,8 @@ namespace rt
 
 		virtual ~Sphere() { }
 
-		bool BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const override;
-		bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
+		virtual bool BuildAABB(float tMin, float tMax, maths::AABB& outAABB) const override;
+		virtual bool Hit(const maths::Ray& r, float tMin, float tMax, HitRecord& rec) const override;
 
 	private:
 		maths::Vec3 center;

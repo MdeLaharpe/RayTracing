@@ -12,7 +12,7 @@ namespace rt
 		constexpr Metal() : albedo(), fuzz(0.f) { }
 		constexpr Metal(const maths::Vec3& albedo, float fuzz) : albedo(albedo), fuzz(fuzz) { }
 
-		bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const override;
+		virtual bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const override;
 
 	private:
 		maths::Vec3 albedo;
