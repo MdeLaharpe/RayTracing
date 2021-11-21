@@ -9,8 +9,7 @@ namespace maths
 	struct AABB
 	{
 		constexpr AABB() { }
-		constexpr AABB(const Vec3& minimum, const Vec3& maximum)
-			: minimum(minimum), maximum(maximum) { }
+		constexpr AABB(const Vec3& minimum, const Vec3& maximum) : minimum(minimum), maximum(maximum) { }
 
 		Vec3 minimum, maximum;
 

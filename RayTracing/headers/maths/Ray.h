@@ -8,9 +8,7 @@ namespace maths
 	struct Ray
 	{
 		constexpr Ray() : time(0.f) { }
-		constexpr Ray(const Vec3& origin, const Vec3& direction, float time)
-			: origin(origin), direction(direction), time(time)
-		{ }
+		constexpr Ray(const Vec3& origin, const Vec3& direction, float time) : origin(origin), direction(direction), time(time) { }
 
 		Vec3 origin;
 		Vec3 direction;

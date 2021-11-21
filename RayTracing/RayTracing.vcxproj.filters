@@ -78,6 +78,9 @@
     <ClCompile Include="sources\maths\Utils.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
+    <ClCompile Include="sources\textures\Checker.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\maths\Vec3.h">
@@ -129,6 +132,9 @@
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
     <ClInclude Include="headers\textures\Texture.h">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\textures\Checker.h">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>
