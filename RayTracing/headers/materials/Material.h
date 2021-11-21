@@ -9,6 +9,8 @@ namespace rt
 	class Material
 	{
 	public:
+		virtual ~Material() { }
+
 		virtual bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const = 0;
 	};
 }

@@ -18,6 +18,8 @@ namespace rt
 		Lambertian(const maths::Vec3& albedo) : albedo(std::make_shared<SolidColor>(albedo)) { }
 		Lambertian(std::shared_ptr<Texture> albedo) : albedo(std::move(albedo)) { }
 
+		virtual ~Lambertian() { }
+
 		virtual bool Scatter(const maths::Ray& rayIn, const HitRecord& rec, maths::Vec3& attenuation, maths::Ray& scattered) const override;
 
 	private:

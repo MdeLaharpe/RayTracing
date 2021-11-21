@@ -8,6 +8,8 @@ namespace rt
 	class Texture
 	{
 	public:
+		virtual ~Texture() { }
+
 		virtual maths::Vec3 Value(float u, float v, const maths::Vec3& point) const = 0;
 	};
 }

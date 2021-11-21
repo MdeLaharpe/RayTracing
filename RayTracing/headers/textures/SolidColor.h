@@ -11,6 +11,8 @@ namespace rt
 		constexpr SolidColor() : color() { }
 		constexpr SolidColor(const maths::Vec3& color) : color(color) { }
 
+		virtual ~SolidColor() { }
+
 		virtual maths::Vec3 Value(float u, float v, const maths::Vec3& point) const override;
 
 	private:

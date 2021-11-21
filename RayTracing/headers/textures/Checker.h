@@ -21,6 +21,8 @@ namespace rt
 			: evenTexture(std::move(evenTexture)), oddTexture(std::move(oddTexture)), piOverScale(maths::pi / scale)
 		{ }
 
+		virtual ~Checker() { }
+
 		virtual maths::Vec3 Value(float u, float v, const maths::Vec3& point) const override;
 
 	private:
