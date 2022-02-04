@@ -72,13 +72,13 @@
     <ClCompile Include="sources\hittables\BVHNode.cpp">
       <Filter>Source Files\Hittables</Filter>
     </ClCompile>
-    <ClCompile Include="sources\textures\SolidColor.cpp">
+    <ClCompile Include="sources\textures\SolidColorTexture.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
     <ClCompile Include="sources\maths\Utils.cpp">
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
-    <ClCompile Include="sources\textures\Checker.cpp">
+    <ClCompile Include="sources\textures\CheckerTexture.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
   </ItemGroup>
@@ -128,13 +128,13 @@
     <ClInclude Include="headers\hittables\BVHNode.h">
       <Filter>Header Files\Hittables</Filter>
     </ClInclude>
-    <ClInclude Include="headers\textures\SolidColor.h">
+    <ClInclude Include="headers\textures\SolidColorTexture.h">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
     <ClInclude Include="headers\textures\Texture.h">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
-    <ClInclude Include="headers\textures\Checker.h">
+    <ClInclude Include="headers\textures\CheckerTexture.h">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>

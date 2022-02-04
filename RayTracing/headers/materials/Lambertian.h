@@ -7,15 +7,15 @@
 
 #include "maths/Vec3.h"
 #include "textures/Texture.h"
-#include "textures/SolidColor.h"
+#include "textures/SolidColorTexture.h"
 
 namespace rt
 {
 	class Lambertian : public Material
 	{
 	public:
-		Lambertian() : albedo(std::make_shared<SolidColor>()) { }
-		Lambertian(const maths::Vec3& albedo) : albedo(std::make_shared<SolidColor>(albedo)) { }
+		Lambertian() : albedo(std::make_shared<SolidColorTexture>()) { }
+		Lambertian(const maths::Vec3& albedo) : albedo(std::make_shared<SolidColorTexture>(albedo)) { }
 		Lambertian(std::shared_ptr<Texture> albedo) : albedo(std::move(albedo)) { }
 
 		virtual ~Lambertian() { }

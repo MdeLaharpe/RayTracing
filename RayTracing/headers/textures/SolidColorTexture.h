@@ -5,13 +5,13 @@
 
 namespace rt
 {
-	class SolidColor : public Texture
+	class SolidColorTexture : public Texture
 	{
 	public:
-		constexpr SolidColor() : color() { }
-		constexpr SolidColor(const maths::Vec3& color) : color(color) { }
+		constexpr SolidColorTexture() : color() { }
+		constexpr SolidColorTexture(const maths::Vec3& color) : color(color) { }
 
-		virtual ~SolidColor() { }
+		virtual ~SolidColorTexture() { }
 
 		virtual maths::Vec3 Value(float u, float v, const maths::Vec3& point) const override;
 

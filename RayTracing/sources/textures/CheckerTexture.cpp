@@ -1,10 +1,10 @@
-#include "textures/Checker.h"
+#include "textures/CheckerTexture.h"
 
 #include <cmath>
 
 namespace rt
 {
-	maths::Vec3 Checker::Value(float u, float v, const maths::Vec3& point) const
+	maths::Vec3 CheckerTexture::Value(float u, float v, const maths::Vec3& point) const
 	{
 		float sines = std::sin(piOverScale * point.x) * std::sin(piOverScale * point.y) * std::sin(piOverScale * point.z);
 		if (sines < 0.f)
