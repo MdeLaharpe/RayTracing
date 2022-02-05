@@ -37,6 +37,9 @@
     <Filter Include="Header Files\Textures">
       <UniqueIdentifier>{d570714e-afc3-4583-8360-cb97cccba461}</UniqueIdentifier>
     </Filter>
+    <Filter Include="TemplateFiles">
+      <UniqueIdentifier>{251402ca-2722-492e-863c-6f3695c36762}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="sources\main.cpp">
@@ -79,6 +82,9 @@
       <Filter>Source Files\Maths</Filter>
     </ClCompile>
     <ClCompile Include="sources\textures\CheckerTexture.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="sources\textures\NoiseTexture.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
   </ItemGroup>
@@ -137,5 +143,16 @@
     <ClInclude Include="headers\textures\CheckerTexture.h">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
+    <ClInclude Include="headers\PerlinNoise3D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\textures\NoiseTexture.h">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="headers\PerlinNoise3D.inl">
+      <Filter>TemplateFiles</Filter>
+    </None>
   </ItemGroup>
 </Project>

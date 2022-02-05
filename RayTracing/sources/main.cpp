@@ -16,6 +16,7 @@
 #include "materials/Dielectric.h"
 #include "textures/SolidColorTexture.h"
 #include "textures/CheckerTexture.h"
+#include "textures/NoiseTexture.h"
 
 maths::Vec3 Color(const maths::Ray& r, const rt::Hittable* world, size_t depth, size_t depthMax)
 {
@@ -73,12 +74,10 @@ int main(int argc, char* argv[])
 	std::vector<std::shared_ptr<rt::Hittable>> spheres;
 	spheres.reserve(5);
 
-	std::shared_ptr<rt::Texture> evenTexture = std::make_shared<rt::SolidColorTexture>(maths::Vec3(1.f, 1.f, 1.f));
 	std::shared_ptr<rt::Texture> oddEvenTexture = std::make_shared<rt::SolidColorTexture>(maths::Vec3(0.8f, 0.8f, 0.f));
 	std::shared_ptr<rt::Texture> oddOddTexture = std::make_shared<rt::SolidColorTexture>(maths::Vec3(0.f, 0.f, 0.f));
-	std::shared_ptr<rt::Texture> oddTexture = std::make_shared<rt::CheckerTexture>(oddEvenTexture, oddOddTexture, 1.f);
-	std::shared_ptr<rt::Texture> checkerTexture = std::make_shared<rt::CheckerTexture>(evenTexture, oddTexture, 0.5f);
-	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, std::make_shared<rt::Lambertian>(checkerTexture)));
+	std::shared_ptr<rt::Texture> noiseTexture = std::make_shared<rt::NoiseTexture>();
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, std::make_shared<rt::Lambertian>(noiseTexture)));
 
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Dielectric>(1.5f)));
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, std::make_shared<rt::Dielectric>(1.5f)));

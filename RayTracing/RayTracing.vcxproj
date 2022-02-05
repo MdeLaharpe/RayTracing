@@ -176,6 +176,7 @@
     <ClCompile Include="sources\maths\Utils.cpp" />
     <ClCompile Include="sources\Random.cpp" />
     <ClCompile Include="sources\textures\CheckerTexture.cpp" />
+    <ClCompile Include="sources\textures\NoiseTexture.cpp" />
     <ClCompile Include="sources\textures\SolidColorTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -193,10 +194,15 @@
     <ClInclude Include="headers\maths\Ray.h" />
     <ClInclude Include="headers\maths\Utils.h" />
     <ClInclude Include="headers\maths\Vec3.h" />
+    <ClInclude Include="headers\PerlinNoise3D.h" />
     <ClInclude Include="headers\Random.h" />
     <ClInclude Include="headers\textures\CheckerTexture.h" />
+    <ClInclude Include="headers\textures\NoiseTexture.h" />
     <ClInclude Include="headers\textures\SolidColorTexture.h" />
     <ClInclude Include="headers\textures\Texture.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="headers\PerlinNoise3D.inl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
