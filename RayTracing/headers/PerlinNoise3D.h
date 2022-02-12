@@ -19,7 +19,7 @@ namespace rt
 	private:
 		static constexpr size_t volume = size * size * size;
 
-		std::array<float, volume> values;
+		std::array<maths::Vec3, volume> values;
 		std::array<int32_t, volume> permX;
 		std::array<int32_t, volume> permY;
 		std::array<int32_t, volume> permZ;

@@ -2,6 +2,8 @@
 
 #include <random>
 
+#include "maths/Utils.h"
+
 namespace rt
 {
 	std::random_device randDevice;
@@ -36,6 +38,16 @@ namespace rt
 		maths::Vec3 point;
 		do { point = 2.f * maths::Vec3(Rand01(), Rand01(), Rand01()) - maths::Vec3(1.f); }
 		while (point.MagnitudeSquared() > 1.f);
+		return point;
+	}
+
+	maths::Vec3 RandOnUnitSphere()
+	{
+		maths::Vec3 point;
+		point.z = Rand(-1.f, 1.f);
+		float azimuth = Rand(0.f, 2.f * maths::pi);
+		point.x = std::sqrt(1.f - point.z * point.z) * std::cos(azimuth);
+		point.y = std::sqrt(1.f - point.z * point.z) * std::sin(azimuth);
 		return point;
 	}
 }

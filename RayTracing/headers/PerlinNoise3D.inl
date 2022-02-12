@@ -6,7 +6,7 @@ namespace rt
 	PerlinNoise3D<size>::PerlinNoise3D()
 	{
 		for (size_t i = 0; i < volume; i++)
-			values[i] = Rand01();
+			values[i] = RandOnUnitSphere();
 
 		GeneratePermutation(permX);
 		GeneratePermutation(permY);
@@ -34,15 +34,15 @@ namespace rt
 		float u = point.x - std::floor(point.x);
 		float v = point.y - std::floor(point.y);
 		float w = point.z - std::floor(point.z);
-		u = u * u * (3.f - 2.f * u);
-		v = v * v * (3.f - 2.f * v);
-		w = w * w * (3.f - 2.f * w);
+		float uu = u * u * (3.f - 2.f * u);
+		float vv = v * v * (3.f - 2.f * v);
+		float ww = w * w * (3.f - 2.f * w);
 
 		size_t i = static_cast<size_t>(std::floor(point.x));
 		size_t j = static_cast<size_t>(std::floor(point.y));
 		size_t k = static_cast<size_t>(std::floor(point.z));
 
-		float c[2][2][2];
+		maths::Vec3 c[2][2][2];
 
 		for (size_t di = 0; di < 2; di++)
 			for (size_t dj = 0; dj < 2; dj++)
@@ -57,12 +57,15 @@ namespace rt
 		for (size_t ii = 0; ii < 2; ii++)
 			for (size_t jj = 0; jj < 2; jj++)
 				for (size_t kk = 0; kk < 2; kk++)
+				{
+					maths::Vec3 weight(u - ii, v - jj, w - kk);
 					acc +=
-						(ii * u + (1.f - ii) * (1.f - u)) *
-						(jj * v + (1.f - jj) * (1.f - v)) *
-						(kk * w + (1.f - kk) * (1.f - w)) *
-						c[ii][jj][kk]
+						(ii * uu + (1.f - ii) * (1.f - uu)) *
+						(jj * vv + (1.f - jj) * (1.f - vv)) *
+						(kk * ww + (1.f - kk) * (1.f - ww)) *
+						Dot(c[ii][jj][kk], weight)
 					;
+				}
 
 		return acc;
 	}
