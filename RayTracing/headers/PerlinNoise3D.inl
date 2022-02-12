@@ -69,4 +69,21 @@ namespace rt
 
 		return acc;
 	}
+
+	template<size_t size>
+	float PerlinNoise3D<size>::Sample(const maths::Vec3& point, size_t turbulenceDepth) const
+	{
+		maths::Vec3 tempPoint = point;
+		float weight = 1.f;
+		float acc = 0.f;
+
+		for (size_t d = 0; d < turbulenceDepth; d++)
+		{
+			acc += weight * Sample(tempPoint);
+			tempPoint *= 2.f;
+			weight *= 0.5f;
+		}
+
+		return acc;
+	}
 }

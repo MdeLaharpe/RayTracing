@@ -15,6 +15,7 @@ namespace rt
 		~PerlinNoise3D() = default;
 
 		float Sample(const maths::Vec3& point) const;
+		float Sample(const maths::Vec3& point, size_t turbulenceDepth) const;
 
 	private:
 		static constexpr size_t volume = size * size * size;
@@ -26,6 +27,7 @@ namespace rt
 
 		static void GeneratePermutation(std::array<int32_t, volume>& perm);
 	};
+
 }
 
 #endif RT_PERLINNOISE_H
