@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 
 	std::shared_ptr<rt::Texture> oddEvenTexture = std::make_shared<rt::SolidColorTexture>(maths::Vec3(0.8f, 0.8f, 0.f));
 	std::shared_ptr<rt::Texture> oddOddTexture = std::make_shared<rt::SolidColorTexture>(maths::Vec3(0.f, 0.f, 0.f));
-	std::shared_ptr<rt::Texture> noiseTexture = std::make_shared<rt::NoiseTexture>();
+	std::shared_ptr<rt::Texture> noiseTexture = std::make_shared<rt::NoiseTexture>(5.f);
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, -500.5f, -1.f), 500.f, std::make_shared<rt::Lambertian>(noiseTexture)));
 
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Dielectric>(1.5f)));

@@ -10,13 +10,15 @@ namespace rt
 	class NoiseTexture : public Texture
 	{
 	public:
-		NoiseTexture() : noise() { }
+		NoiseTexture() : noise(), frequency(1.f) { }
+		NoiseTexture(float frequency) : noise(), frequency(frequency) { }
 		virtual ~NoiseTexture() { }
 
 		virtual maths::Vec3 Value(float u, float v, const maths::Vec3& point) const override;
 
 	private:
 		PerlinNoise3D<8> noise;
+		float frequency;
 	};
 }
 
