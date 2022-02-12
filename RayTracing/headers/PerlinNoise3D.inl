@@ -34,6 +34,9 @@ namespace rt
 		float u = point.x - std::floor(point.x);
 		float v = point.y - std::floor(point.y);
 		float w = point.z - std::floor(point.z);
+		u = u * u * (3.f - 2.f * u);
+		v = v * v * (3.f - 2.f * v);
+		w = w * w * (3.f - 2.f * w);
 
 		size_t i = static_cast<size_t>(std::floor(point.x));
 		size_t j = static_cast<size_t>(std::floor(point.y));
