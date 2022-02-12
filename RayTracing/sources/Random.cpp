@@ -6,8 +6,10 @@
 
 namespace rt
 {
-	std::random_device randDevice;
-	std::default_random_engine randEngine(randDevice());
+	std::seed_seq seed({ 0, 1 });
+	std::mt19937 randEngine(seed);
+	//std::random_device randDevice;
+	//std::default_random_engine randEngine(randDevice());
 	std::uniform_real_distribution<float> randDistribution(0.f, 1.f);
 
 	float Rand01()
