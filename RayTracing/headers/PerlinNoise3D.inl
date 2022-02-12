@@ -31,10 +31,36 @@ namespace rt
 	template<size_t size>
 	float PerlinNoise3D<size>::Sample(const maths::Vec3& point) const
 	{
-		size_t i = static_cast<size_t>(4 * point.x) & 255;
-		size_t j = static_cast<size_t>(4 * point.y) & 255;
-		size_t k = static_cast<size_t>(4 * point.z) & 255;
+		float u = point.x - std::floor(point.x);
+		float v = point.y - std::floor(point.y);
+		float w = point.z - std::floor(point.z);
 
-		return values[permX[i] ^ permY[j] ^ permZ[k]];
+		size_t i = static_cast<size_t>(std::floor(point.x));
+		size_t j = static_cast<size_t>(std::floor(point.y));
+		size_t k = static_cast<size_t>(std::floor(point.z));
+
+		float c[2][2][2];
+
+		for (size_t di = 0; di < 2; di++)
+			for (size_t dj = 0; dj < 2; dj++)
+				for (size_t dk = 0; dk < 2; dk++)
+					c[di][dj][dk] = values[
+						permX[(i + di) & 255] ^
+						permY[(j + dj) & 255] ^
+						permZ[(k + dk) & 255]
+					];
+
+		float acc = 0.f;
+		for (size_t ii = 0; ii < 2; ii++)
+			for (size_t jj = 0; jj < 2; jj++)
+				for (size_t kk = 0; kk < 2; kk++)
+					acc +=
+						(ii * u + (1.f - ii) * (1.f - u)) *
+						(jj * v + (1.f - jj) * (1.f - v)) *
+						(kk * w + (1.f - kk) * (1.f - w)) *
+						c[ii][jj][kk]
+					;
+
+		return acc;
 	}
 }
