@@ -17,6 +17,7 @@
 #include "textures/SolidColorTexture.h"
 #include "textures/CheckerTexture.h"
 #include "textures/NoiseTexture.h"
+#include "textures/ImageTexture.h"
 
 maths::Vec3 Color(const maths::Ray& r, const rt::Hittable* world, size_t depth, size_t depthMax)
 {
@@ -61,8 +62,8 @@ int main(int argc, char* argv[])
 
 	// Camera
 	const float time0 =  0.f, time1 = 1.f;
-	const maths::Vec3 cameraPos{ -1.f, 2.f, 1.f };
-	const maths::Vec3 lookAt{ 0.f, 0.f, -1.f };
+	const maths::Vec3 cameraPos{ 5.f, 2.f, 1.f };
+	const maths::Vec3 lookAt{ 0.f, 1.f, -3.f };
 	const maths::Vec3 up{ 0.f, 1.f, 0.f };
 	const float verticalFovDeg = 90.f;
 	const float aperture = 0.01f;
@@ -83,6 +84,9 @@ int main(int argc, char* argv[])
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, std::make_shared<rt::Dielectric>(1.5f)));
 	spheres.emplace_back(new rt::MovingSphere(maths::Vec3(0.f, 0.f, -1.f), maths::Vec3(0.f, 1.f, -1.f), time0, time1, 0.5f, std::make_shared<rt::Lambertian>(maths::Vec3(0.8f, 0.3f, 0.3f))));
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Metal>(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f)));
+
+	std::shared_ptr<rt::Texture> earthTexture = std::make_shared<rt::ImageTexture>("resources/earthmap.jpg");
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, 1.f, -3.f), 2.f, std::make_shared<rt::Lambertian>(earthTexture)));
 
 	const rt::BVHNode world(spheres, 0, spheres.size(), time0, time1);
 

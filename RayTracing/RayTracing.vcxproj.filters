@@ -87,6 +87,9 @@
     <ClCompile Include="sources\textures\NoiseTexture.cpp">
       <Filter>Source Files\Textures</Filter>
     </ClCompile>
+    <ClCompile Include="sources\textures\ImageTexture.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\maths\Vec3.h">
@@ -147,6 +150,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="headers\textures\NoiseTexture.h">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\textures\ImageTexture.h">
       <Filter>Header Files\Textures</Filter>
     </ClInclude>
   </ItemGroup>
