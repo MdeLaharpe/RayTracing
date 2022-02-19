@@ -96,6 +96,9 @@
     <ClCompile Include="sources\materials\Material.cpp">
       <Filter>Source Files\Materials</Filter>
     </ClCompile>
+    <ClCompile Include="sources\hittables\AARect.cpp">
+      <Filter>Source Files\Hittables</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\maths\Vec3.h">
@@ -163,6 +166,9 @@
     </ClInclude>
     <ClInclude Include="headers\materials\DiffuseLight.h">
       <Filter>Header Files\Materials</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\hittables\AARect.h">
+      <Filter>Header Files\Hittables</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

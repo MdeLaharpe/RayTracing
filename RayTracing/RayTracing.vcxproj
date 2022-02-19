@@ -180,6 +180,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="sources\Camera.cpp" />
+    <ClCompile Include="sources\hittables\AARect.cpp" />
     <ClCompile Include="sources\hittables\BVHNode.cpp" />
     <ClCompile Include="sources\hittables\HittableList.cpp" />
     <ClCompile Include="sources\hittables\MovingSphere.cpp" />
@@ -200,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Camera.h" />
+    <ClInclude Include="headers\hittables\AARect.h" />
     <ClInclude Include="headers\hittables\BVHNode.h" />
     <ClInclude Include="headers\hittables\Hittable.h" />
     <ClInclude Include="headers\hittables\HittableList.h" />

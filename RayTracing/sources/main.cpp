@@ -11,6 +11,7 @@
 #include "hittables/HittableList.h"
 #include "hittables/Sphere.h"
 #include "hittables/MovingSphere.h"
+#include "hittables/AARect.h"
 #include "materials/Lambertian.h"
 #include "materials/Metal.h"
 #include "materials/Dielectric.h"
@@ -44,7 +45,7 @@ int main(int argc, char* argv[])
 
 	// Image
 	const float aspectRatio = 16.f / 9.f;
-	const size_t imageWidth = 800;
+	const size_t imageWidth = 400;
 	const size_t imageHeight = static_cast<int>(imageWidth / aspectRatio);
 	const size_t samplesPerPixel = 100;
 	const size_t depthMax = 5;
@@ -84,15 +85,20 @@ int main(int argc, char* argv[])
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Dielectric>(1.5f)));
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, std::make_shared<rt::Dielectric>(1.5f)));
 	spheres.emplace_back(new rt::MovingSphere(maths::Vec3(0.f, 0.f, -1.f), maths::Vec3(0.f, 1.f, -1.f), time0, time1, 0.5f, std::make_shared<rt::Lambertian>(maths::Vec3(0.8f, 0.3f, 0.3f))));
-	//spheres.emplace_back(new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Metal>(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f)));
-	spheres.emplace_back(new rt::Sphere(maths::Vec3(2.f, 4.f, -3.f), 0.5f, std::make_shared<rt::DiffuseLight>()));
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Metal>(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f)));
 
 	std::shared_ptr<rt::Texture> earthTexture = std::make_shared<rt::ImageTexture>("resources/earthmap.jpg");
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, 1.f, -3.f), 2.f, std::make_shared<rt::Lambertian>(earthTexture)));
 
+	std::shared_ptr<rt::Texture> lightTexture = std::make_shared<rt::SolidColorTexture>(maths::Vec3{ 1.f, 1.f, 1.f });
+	spheres.emplace_back(new rt::XYRect(2.f, -0.5f, 0.5f, 0.f, 2.f, std::make_shared<rt::DiffuseLight>(lightTexture)));
+	spheres.emplace_back(new rt::XZRect(4.f, -0.5f, 0.5f, 0.f, -2.f, std::make_shared<rt::DiffuseLight>(lightTexture)));
+	spheres.emplace_back(new rt::YZRect(-2.f, 0.f, 2.f, -0.5f, -1.5f, std::make_shared<rt::DiffuseLight>(lightTexture)));
+
 	const rt::BVHNode world(spheres, 0, spheres.size(), time0, time1);
 
-	const maths::Vec3 backgroundColor{ 0.0f, 0.0f, 0.f };
+	//const maths::Vec3 backgroundColor = maths::Vec3{ 0.5f, 0.7f, 1.f } / 10.f;
+	const maths::Vec3 backgroundColor{};
 
 	// Render
 	for (int j = imageHeight - 1; j >= 0; j--)
