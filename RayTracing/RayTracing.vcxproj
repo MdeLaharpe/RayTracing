@@ -186,7 +186,9 @@
     <ClCompile Include="sources\hittables\Sphere.cpp" />
     <ClCompile Include="sources\main.cpp" />
     <ClCompile Include="sources\materials\Dielectric.cpp" />
+    <ClCompile Include="sources\materials\DiffuseLight.cpp" />
     <ClCompile Include="sources\materials\Lambertian.cpp" />
+    <ClCompile Include="sources\materials\Material.cpp" />
     <ClCompile Include="sources\materials\Metal.cpp" />
     <ClCompile Include="sources\maths\AABB.cpp" />
     <ClCompile Include="sources\maths\Utils.cpp" />
@@ -204,6 +206,7 @@
     <ClInclude Include="headers\hittables\MovingSphere.h" />
     <ClInclude Include="headers\hittables\Sphere.h" />
     <ClInclude Include="headers\materials\Dielectric.h" />
+    <ClInclude Include="headers\materials\DiffuseLight.h" />
     <ClInclude Include="headers\materials\Lambertian.h" />
     <ClInclude Include="headers\materials\Material.h" />
     <ClInclude Include="headers\materials\Metal.h" />

@@ -14,27 +14,28 @@
 #include "materials/Lambertian.h"
 #include "materials/Metal.h"
 #include "materials/Dielectric.h"
+#include "materials/DiffuseLight.h"
 #include "textures/SolidColorTexture.h"
 #include "textures/CheckerTexture.h"
 #include "textures/NoiseTexture.h"
 #include "textures/ImageTexture.h"
 
-maths::Vec3 Color(const maths::Ray& r, const rt::Hittable* world, size_t depth, size_t depthMax)
+maths::Vec3 Color(const maths::Ray& r, const maths::Vec3& backgroundColor, const rt::Hittable& world, size_t depth, size_t depthMax)
 {
 	rt::HitRecord rec;
-	if (world->Hit(r, 0.001f, 1000.f, rec))
+	if (world.Hit(r, 0.001f, 1000.f, rec))
 	{
 		maths::Ray scattered;
 		maths::Vec3 attenuation;
+		maths::Vec3 emitted = rec.material->Emit(rec.u, rec.v, rec.point);
+
 		if (depth < depthMax && rec.material->Scatter(r, rec, attenuation, scattered))
-			return attenuation * Color(scattered, world, depth + 1, depthMax);
+			return emitted + attenuation * Color(scattered, backgroundColor, world, depth + 1, depthMax);
 		else
-			return maths::Vec3();
+			return emitted;
 	}
 
-	maths::Vec3 unitDirection = Normalized(r.direction);
-	float t = 0.5f * (unitDirection.y + 1.f);
-	return (1.f - t) * maths::Vec3(1.f, 1.f, 1.f) + t * maths::Vec3(0.5f, 0.7f, 1.f);
+	return backgroundColor;
 }
 
 int main(int argc, char* argv[])
@@ -43,9 +44,9 @@ int main(int argc, char* argv[])
 
 	// Image
 	const float aspectRatio = 16.f / 9.f;
-	const size_t imageWidth = 400;
+	const size_t imageWidth = 800;
 	const size_t imageHeight = static_cast<int>(imageWidth / aspectRatio);
-	const size_t samplesPerPixel = 16;
+	const size_t samplesPerPixel = 100;
 	const size_t depthMax = 5;
 
 	// Opening the output file
@@ -83,12 +84,15 @@ int main(int argc, char* argv[])
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Dielectric>(1.5f)));
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(-1.f, 0.f, -1.f), -0.45f, std::make_shared<rt::Dielectric>(1.5f)));
 	spheres.emplace_back(new rt::MovingSphere(maths::Vec3(0.f, 0.f, -1.f), maths::Vec3(0.f, 1.f, -1.f), time0, time1, 0.5f, std::make_shared<rt::Lambertian>(maths::Vec3(0.8f, 0.3f, 0.3f))));
-	spheres.emplace_back(new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Metal>(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f)));
+	//spheres.emplace_back(new rt::Sphere(maths::Vec3(1.f, 0.f, -1.f), 0.5f, std::make_shared<rt::Metal>(maths::Vec3(0.8f, 0.6f, 0.2f), 1.f)));
+	spheres.emplace_back(new rt::Sphere(maths::Vec3(2.f, 4.f, -3.f), 0.5f, std::make_shared<rt::DiffuseLight>()));
 
 	std::shared_ptr<rt::Texture> earthTexture = std::make_shared<rt::ImageTexture>("resources/earthmap.jpg");
 	spheres.emplace_back(new rt::Sphere(maths::Vec3(0.f, 1.f, -3.f), 2.f, std::make_shared<rt::Lambertian>(earthTexture)));
 
 	const rt::BVHNode world(spheres, 0, spheres.size(), time0, time1);
+
+	const maths::Vec3 backgroundColor{ 0.0f, 0.0f, 0.f };
 
 	// Render
 	for (int j = imageHeight - 1; j >= 0; j--)
@@ -103,7 +107,7 @@ int main(int argc, char* argv[])
 				float v = (j + rt::Rand01()) / (imageHeight + 1);
 				maths::Ray r = camera.GetRay(u, v);
 
-				color += Color(r, &world, 0, depthMax);
+				color += Color(r, backgroundColor, world, 0, depthMax);
 			}
 
 			color /= float(samplesPerPixel);
